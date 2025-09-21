@@ -3,27 +3,89 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BYE-xiety</title>
+  <title>BYE-xiety Furnace</title>
   <style>
     body {
       margin: 0;
       height: 100vh;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       font-family: sans-serif;
       background: linear-gradient(135deg, #a8edea, #fed6e3);
       color: #333;
+      text-align: center;
+      padding: 20px;
     }
     h1 {
       font-size: 3em;
       font-weight: bold;
-      letter-spacing: 2px;
+      margin-bottom: 20px;
       text-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+    p {
+      font-size: 1.2em;
+      margin-bottom: 30px;
+    }
+    input {
+      padding: 10px;
+      font-size: 1em;
+      width: 300px;
+      border: 2px solid #ccc;
+      border-radius: 5px;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 1em;
+      background-color: #ff6b6b;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #ff4040;
+    }
+    .burn {
+      animation: burn 1.5s forwards;
+    }
+    @keyframes burn {
+      0% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.2) rotate(3deg); color: orange; }
+      100% { opacity: 0; transform: scale(0.5) rotate(-10deg); }
     }
   </style>
 </head>
 <body>
   <h1>BYE-xiety</h1>
+  <p>Type your anxious thought below and burn it away 🔥</p>
+  
+  <input id="anxietyInput" type="text" placeholder="Type your worry here...">
+  <br>
+  <button onclick="burnMessage()">Burn It</button>
+
+  <p id="burnArea"></p>
+
+  <script>
+    function burnMessage() {
+      const input = document.getElementById("anxietyInput");
+      const burnArea = document.getElementById("burnArea");
+      
+      if (input.value.trim() !== "") {
+        burnArea.textContent = input.value;
+        burnArea.classList.add("burn");
+        input.value = "";
+
+        // Clear the text after animation
+        setTimeout(() => {
+          burnArea.textContent = "";
+          burnArea.classList.remove("burn");
+        }, 1500);
+      }
+    }
+  </script>
 </body>
 </html>
